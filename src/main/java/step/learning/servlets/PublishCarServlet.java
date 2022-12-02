@@ -294,4 +294,20 @@ public class PublishCarServlet extends HttpServlet {
 //
 //        resp.getWriter().print(reply);
     }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        User authUser = (User) req.getAttribute("AuthUser");
+        String carId = req.getParameter("id");
+        if(authUser!=null&&authUser.getLogin().equals("person"))
+        {
+            if(carsDAO.delete(carId))
+            {
+                resp.sendRedirect(req.getContextPath() + "/carscatalog");
+            }
+            else{
+                resp.getWriter().print("Delete car error");
+            }
+        }
+    }
 }

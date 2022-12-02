@@ -41,7 +41,7 @@ public class CarsDAO {
         }
         for (String filedName : sqlReqNumeric.keySet())  // числовые поля не несут опасности,
         {                                                // поэтому подставляем сразу в запрос
-            sql += String.format("%c u.`%s` = %.1f ", (needComma ? ',' : ' '), filedName, sqlReqNumeric.get(filedName));
+            sql += String.format(Locale.US,"%c u.`%s` = %.2f ", (needComma ? ',' : ' '), filedName, sqlReqNumeric.get(filedName));
             needComma = true;
         }
 
@@ -127,6 +127,21 @@ public class CarsDAO {
         }
 
         return id;
+    }
+
+    public boolean delete(String id)
+    {
+        String sql = "DELETE FROM Cars WHERE `id` = ?";
+        try(PreparedStatement prep = dataService.getConnection().prepareStatement(sql)) {
+            prep.setString(1,id);
+            prep.executeUpdate();
+        }
+        catch (SQLException e) {
+            System.out.println("CarsDAO::delete "+e.getMessage());
+            System.out.println(sql);
+            return false;
+        }
+        return true;
     }
 
     public boolean SetActive (String id) {

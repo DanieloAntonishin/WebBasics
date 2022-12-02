@@ -19,7 +19,7 @@
             <div class="margin-top">
                 <p>Car in rent</p>
                 <div>
-                    <img class="auth-fragment-avatar" src="<%=home%>/image/<%=car.getPics()%>" alt="<%=car.getModel()%>"/>
+                    <img class="user-profile-img" src="<%=home%>/image/<%=car.getPics()%>" alt="<%=car.getModel()%>"/>
                     <b data-field-name="carId"><%=car.getModel()%></b>
                     <button id="remove-rent-car">Remove from rent</button>
                 </div>

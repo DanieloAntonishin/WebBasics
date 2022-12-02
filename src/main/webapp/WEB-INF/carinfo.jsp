@@ -12,10 +12,21 @@
         <section class="car-section-left">
             <div class="container-centre">
                 <img class="car-img" src="<%=home%>/image/<%=car.getPics()%>" alt="<%=car.getModel()%>">
+                <%if(authUser!=null && authUser.getLogin().equals("person")) { %>
+                    <div class="profile-field">
+                        <span>Change pics:</span>
+                        <input class="form-group" type="file" id="car-pics" alt="car-input"/>
+                        <br>
+                        <button  id="car-pics-button" class="car-card-button">Change car picture</button>
+                    </div>
+                    <div>
+                        <button  id="car-delete-button" class="car-card-button-delete">Delete a car</button>
+                    </div>
+                <% } %>
             </div>
         </section>
         <section class="car-section-right">
-                <p><h4><span data-field-name="model" ><%=car.getModel()%></span></h4></p>
+                <p><h3><span data-field-name="model" ><%=car.getModel()%></span></h3></p>
                 <p>Body Type: <span data-field-name="bodyType" ><%=car.getBodyType()%></span></p>
                 <p>Horse Power: <span data-field-name="horsePower" ><%=car.getHorsePower()%></span></p>
                 <p>Engine Volume: <span data-field-name="engineVolume"><%=car.getEngineVolume()%></span></p>
@@ -44,16 +55,58 @@
                 nameElement.addEventListener("blur", nameBlur)
                 nameElement.addEventListener("keydown", nameKeyDown)
             }
+            const picsSaveButton=document.querySelector("#car-pics-button")
+            picsSaveButton.addEventListener('click',picsSaveClick)
+            const deleteCarButton=document.querySelector("#car-delete-button")
+            deleteCarButton.addEventListener('click',deleteCarClick)
+
         <% } else { %>
-        const rentCarButton=document.querySelector("#rent-button")
-        rentCarButton.addEventListener('click',rentCarClick)
+            const rentCarButton=document.querySelector("#rent-button")
+            rentCarButton.addEventListener('click',rentCarClick)
         <% } %>
     })
+    let deleteCarClick =()=>{
+        if(confirm("Вы уверены что хотите удалить данную машину? ")) {
+            const url="/WebBasics_war_exploded/publishcar?id=<%=car.getId()%>"
+            fetch(url,{
+                method:"DELETE",
+                headers:{},
+                body:""
+            }).then(r=>r.text())
+                .then(t=>{
+                    console.log(t)
+                })
+        }
+    }
+    let picsSaveClick=()=>{
+        const carInput=document.querySelector("#car-pics")
+        if(!carInput) throw "#carSaveInput Not found"
+        if(carInput.files.length===0)
+        {
+            alert("Select a file")
+            return
+        }
+        let formData=new FormData()
+        formData.append("carPics",carInput.files[0])
+        fetch("/WebBasics_war_exploded/publishcar?id=<%=car.getId()%>",{
+            method:"PUT",
+            headers:{},
+            body:formData  // наличие файла в formData автоматически сформирует multipart запрос
+        }).then(r=>r.text())
+            .then(t=> {
+                console.log(t)
+                if(t==="OK")
+                {
+                    location=location;
+                }
+                else{
+                    alert(t);
+                }
+            })
+    }
     let rentCarClick=()=>{
-
         let menu = document.querySelector(".menu");
         let p = document.createElement("p")
-        alert("hi")
         p.innerHTML="Car rented successful"
         menu.appendChild(p)
         document.querySelector("#rent-button").disable = true

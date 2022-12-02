@@ -275,6 +275,7 @@ input[type="image"]{
 .car-img {
     width: 100%;
     max-width: 550px;
+    max-height: 350px;
     height: auto;
     padding: 20px;
 }
@@ -312,6 +313,11 @@ input[type="image"]{
     padding: 3px 4px;
     transition: color .2s;
 }
+.car-card-button:hover{
+    background-color: white;
+    color:indigo;
+    transition: color .2s;
+}
 .car-card-button:disabled{
     background-color: darkgray;
     color:white;
@@ -321,5 +327,21 @@ input[type="image"]{
     cursor: pointer;
     display: inline-block;
     padding: 3px 4px;
+    transition: color .2s;
+}
+.car-card-button-delete{
+    background-color: darkred;
+    color:white;
+    width: 150px;
+    margin-top: 40px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+    padding: 3px 4px;
+    transition: color .2s;
+}
+.car-card-button-delete:hover{
+    background-color: white;
+    color:darkred;
     transition: color .2s;
 }
