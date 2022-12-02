@@ -1,0 +1,325 @@
+.auth-fragment {
+    width: 100%;
+    background-color: moccasin;
+    padding: .7ch .5em;
+}
+
+body {
+    background-color: #4e4e4e;
+}
+.auth-error{
+    width: 100%;
+    height: 1.5em;
+    background-color: moccasin;
+    color:darkred;
+}
+
+section select {
+    margin: 50px;
+    font-size: x-large;
+    color: darkred;
+    background: lightsteelblue;
+    width: 280px;
+}
+
+p a {
+    font-size: x-large;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+p {
+    margin: 30px;
+}
+
+table {
+    margin: 30px;
+}
+
+table, th, td {
+    border: 1px dotted black;
+    padding: 5px;
+}
+
+hr {
+    border: 2px solid gray;
+}
+
+.pics {
+    margin: 100px;
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+}
+
+form input{
+    width: 200px;
+    background-color: whitesmoke;
+    color: black;
+}
+section{
+    margin-top:100px;
+}
+.hash{
+    background-color: #4e4e4e;
+    color: whitesmoke;
+    text-align: center;
+}
+.auth-sing-up{
+    background-color: indigo;
+    color:white;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+    margin: 5px;
+    padding: 3px 4px;
+    text-decoration: none;
+    transition: color .2s;
+}
+.auth-fragment-avatar{
+    max-height: 50px;
+    max-width: 50px;
+    border: 1px dot-dash black;
+    vertical-align: middle;
+    border-radius: 15%;
+}
+.auth-sing-up:hover{
+    color: black;
+}
+.successful{
+    color:green;
+    text-align: center;
+}
+.auth-profile-a{
+    text-decoration: none;
+    color: blueviolet;
+}
+
+
+.user-profile{
+    background-color: #4e4e4e;
+    color: white;
+}
+.menu{
+    display: flex;
+}
+.user-profile-img{
+    max-width: 110px;
+    max-height: 110px;
+    vertical-align: middle;
+    horiz-align: center;
+    border-radius: 15%;
+    margin-bottom: 50px;
+}
+.user-section-left{
+    text-align: left;
+    width: 200px;
+    margin-left: 30px;
+    margin-bottom: 50px;
+    padding-top: 50px;
+    background-color: darkgray;
+    border-right: 3px solid #252525 ;
+    height:800px;
+    flex: 1;
+}
+.user-section-right{
+    text-align: right;
+    width: auto;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    padding-top: 30px;
+    background-color: darkgray;
+    height:800px;
+    flex: 3;
+}
+.inline{
+    display: inline-block;
+}
+.margin-top{
+    margin-top: 30px;
+}
+.user-section-left a{
+    text-decoration: none;
+    margin-top: 20px;
+    background-color: #797979;
+    color: white;
+    width: 80px;
+    height: 10px;
+    padding: 10px 5px;
+    border-radius: 5%;
+    transition: 0.5s;
+}
+.user-section-left a:hover {
+    background-color: darkorange;
+    color: white;
+}
+.container-centre{
+    text-align: center;
+}
+.input-user-block{
+    padding: 20px;
+}
+.user-profile-button{
+    float: left;
+    margin:30px;
+    width:90px;
+    height:35px;
+    padding: 5px 20px;
+    border: none;
+    border-radius: 5%;
+    background-color: darkorange;
+    color: white;
+}
+.profile-field span{
+    padding: 10px;
+}
+.profile-field span[contenteditable]{
+    padding: 3px;
+    margin-left: 10px;
+}
+input[type="image"]{
+    margin-top: 30px;
+    width:70px;
+    height:70px;
+    background-color: darkgray;
+}
+.check-mail{
+    background-color: darkgray;
+    color: white;
+    text-align: center;
+    height:auto;
+}
+.email-icon{
+    font-size: x-large;
+    margin-left:20px;
+    margin-right:20px;
+}
+.confirm{
+    color:darkgreen;
+}
+.confirm:before{
+    content: '\1F44C';
+    margin-left: 5px;
+}
+.not-confirm{
+    color:darkred;
+}
+.not-confirm:before{
+    content: '\1F44E';
+    margin-left: 5px;
+}
+.js-link{
+    font-size: medium;
+    text-decoration: none;
+    margin-top:20px
+}
+.submitEmailLink{
+    border: 1px solid black;
+    background-color: darkgray;
+    text-decoration: none;
+    color:black;
+}
+.imgBan{
+    text-align: center;
+    height: 750px;
+}
+.car-card-catalog{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 20px;
+}
+.car-card-active{
+    border: 1px solid black;
+    width: 300px;
+    background-color: #4e4e4e;
+    padding: 10px;
+    text-align: center;
+}
+.car-card-disable{
+    filter: grayscale(50%);
+    border: 1px solid black;
+    width: 300px;
+    background-color: #4e4e4e;
+    padding: 10px;
+    text-align: center;
+}
+.car-card-disable a{
+    pointer-events: none;
+    background-color: #252525;
+}
+
+.car-card-img{
+    padding-top: 10px;
+    width: 280px;
+}
+.car-card-text{
+    font-size: small;
+    color: #797979;
+}
+.car-card-link{
+    background-color: indigo;
+    color:white;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+    margin: 5px;
+    padding: 3px 4px;
+    text-decoration: none;
+    transition: color .2s;
+}
+.small{
+    font-size: small;
+    color: #4e4e4e;
+}
+.car-img {
+    width: 100%;
+    max-width: 550px;
+    height: auto;
+    padding: 20px;
+}
+
+.car-section-left{
+    align-self: stretch;
+    text-align: center;
+    width: 200px;
+    margin-left: 100px;
+    margin-right: 80px;
+    margin-bottom: 50px;
+    padding-top: 50px;
+    background-color: darkgray;
+    height:600px;
+    flex: 1 1 auto;
+}
+.car-section-right{
+    font-size: large;
+    width: 300px;
+    margin-right: 100px;
+    margin-bottom: 30px;
+    padding-top: 30px;
+    background-color: darkgray;
+    height:600px;
+    flex: 2 1 auto;
+}
+.car-card-button{
+    background-color: indigo;
+    color:white;
+    width: 150px;
+    margin-top: 40px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+    padding: 3px 4px;
+    transition: color .2s;
+}
+.car-card-button:disabled{
+    background-color: darkgray;
+    color:white;
+    width: 150px;
+    margin-top: 40px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+    padding: 3px 4px;
+    transition: color .2s;
+}
