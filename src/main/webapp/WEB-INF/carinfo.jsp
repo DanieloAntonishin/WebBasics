@@ -26,7 +26,7 @@
             </div>
         </section>
         <section class="car-section-right">
-                <p><h3><span data-field-name="model" ><%=car.getModel()%></span></h3></p>
+                <p style="margin-left: 50%"><h2><span data-field-name="model" ><%=car.getModel()%></span></h2></p>
                 <p>Body Type: <span data-field-name="bodyType" ><%=car.getBodyType()%></span></p>
                 <p>Horse Power: <span data-field-name="horsePower" ><%=car.getHorsePower()%></span></p>
                 <p>Engine Volume: <span data-field-name="engineVolume"><%=car.getEngineVolume()%></span></p>
@@ -59,13 +59,12 @@
             const deleteCarButton=document.querySelector("#car-delete-button")
             deleteCarButton.addEventListener('click',deleteCarClick)
 
-        <% } else { %>
+        <% } %>
             const rentCarButton=document.querySelector("#rent-button")
             rentCarButton.addEventListener('click',rentCarClick)
-        <% } %>
     })
     let deleteCarClick =()=>{
-        if(confirm("Вы уверены что хотите удалить данную машину? ")) {
+        if(confirm("Are you sure you want to delete this machine? ")) {
             const url="/WebBasics_war_exploded/publishcar?id=<%=car.getId()%>"
             fetch(url,{
                 method:"DELETE",
@@ -73,7 +72,7 @@
                 body:""
             }).then(r=>r.text())
                 .then(t=>{
-                    console.log(t)
+                    location = "<%=home%>/carscatalog"
                 })
         }
     }
@@ -142,7 +141,7 @@
         e.target.removeAttribute("contenteditable")
         if( e.target.savedText !== e.target.innerText)
         {
-            if(confirm("Сохранить изменения? ")){
+            if(confirm("Save changes? ")){
                 const fieldName=e.target.getAttribute("data-field-name")
                 const url="/WebBasics_war_exploded/publishcar?id=<%=car.getId()%>&"+fieldName+"="+e.target.innerText
                 //console.log(url); return;

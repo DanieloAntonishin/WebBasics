@@ -28,7 +28,7 @@ public class CarsCatalogServlet extends HttpServlet {
 
         String message = (String) req.getSession().getAttribute("rentMessage");
 
-        req.setAttribute("CarsList",carsList);
+        req.setAttribute("CarsList",carsList); // список с машинами
         req.setAttribute("pageBody", "car-catalog.jsp");
         req.getRequestDispatcher("/WEB-INF/_layout.jsp").forward(req, resp);
     }

@@ -1,11 +1,23 @@
+html{
+ font-family: Arial;
+}
 .auth-fragment {
     width: 100%;
-    background-color: moccasin;
+    background-color: steelblue;
     padding: .7ch .5em;
 }
-
+.main-h1{
+    font-size: xxx-large;
+}
+.main-h3{
+    font-size: large;
+    margin-top: 50px;
+    margin-bottom:30px;
+}
 body {
     background-color: #4e4e4e;
+    overflow-x:hidden;
+    margin:0px;
 }
 .auth-error{
     width: 100%;
@@ -13,10 +25,19 @@ body {
     background-color: moccasin;
     color:darkred;
 }
-
+.container-background-text{
+    position: relative;
+    text-align: center;
+}
+.background-text{
+    position: absolute;
+    top:30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color:white;
+}
 section select {
     margin: 50px;
-    font-size: x-large;
     color: darkred;
     background: lightsteelblue;
     width: 280px;
@@ -57,9 +78,9 @@ form input{
     background-color: whitesmoke;
     color: black;
 }
-section{
-    margin-top:100px;
-}
+/*section{*/
+/*    margin-top:100px;*/
+/*}*/
 .hash{
     background-color: #4e4e4e;
     color: whitesmoke;
@@ -95,9 +116,7 @@ section{
     color: blueviolet;
 }
 
-
 .user-profile{
-    background-color: #4e4e4e;
     color: white;
 }
 .menu{
@@ -115,21 +134,23 @@ section{
     text-align: left;
     width: 200px;
     margin-left: 30px;
-    margin-bottom: 50px;
+    margin-bottom: 100px;
+    margin-top: 30px;
     padding-top: 50px;
-    background-color: darkgray;
+    background-color: steelblue;
     border-right: 3px solid #252525 ;
-    height:800px;
+    height:750px;
     flex: 1;
 }
 .user-section-right{
     text-align: right;
     width: auto;
     margin-right: 30px;
-    margin-bottom: 30px;
+    margin-bottom: 100px;
+    margin-top: 30px;
     padding-top: 30px;
-    background-color: darkgray;
-    height:800px;
+    background-color: steelblue;
+    height:750px;
     flex: 3;
 }
 .inline{
@@ -195,6 +216,7 @@ input[type="image"]{
     margin-right:20px;
 }
 .confirm{
+    margin-top: 10px;
     color:darkgreen;
 }
 .confirm:before{
@@ -232,7 +254,7 @@ input[type="image"]{
 .car-card-active{
     border: 1px solid black;
     width: 300px;
-    background-color: #4e4e4e;
+    background-color: steelblue;
     padding: 10px;
     text-align: center;
 }
@@ -240,7 +262,7 @@ input[type="image"]{
     filter: grayscale(50%);
     border: 1px solid black;
     width: 300px;
-    background-color: #4e4e4e;
+    background-color: steelblue;
     padding: 10px;
     text-align: center;
 }
@@ -255,7 +277,7 @@ input[type="image"]{
 }
 .car-card-text{
     font-size: small;
-    color: #797979;
+    color: lightsteelblue;
 }
 .car-card-link{
     background-color: indigo;
@@ -284,21 +306,18 @@ input[type="image"]{
     align-self: stretch;
     text-align: center;
     width: 200px;
-    margin-left: 100px;
-    margin-right: 80px;
-    margin-bottom: 50px;
+    margin: 50px 80px 50px 100px;
     padding-top: 50px;
-    background-color: darkgray;
+    background-color: steelblue;
     height:600px;
     flex: 1 1 auto;
 }
 .car-section-right{
     font-size: large;
     width: 300px;
-    margin-right: 100px;
-    margin-bottom: 30px;
+    margin: 50px 100px 30px 0px;
     padding-top: 30px;
-    background-color: darkgray;
+    background-color: steelblue;
     height:600px;
     flex: 2 1 auto;
 }
@@ -314,13 +333,13 @@ input[type="image"]{
     transition: color .2s;
 }
 .car-card-button:hover{
-    background-color: white;
+    background-color: lightsteelblue;
     color:indigo;
     transition: color .2s;
 }
 .car-card-button:disabled{
     background-color: darkgray;
-    color:white;
+    color:lightsteelblue;
     width: 150px;
     margin-top: 40px;
     border-radius: 5px;
@@ -341,7 +360,60 @@ input[type="image"]{
     transition: color .2s;
 }
 .car-card-button-delete:hover{
-    background-color: white;
+    background-color: lightsteelblue;
     color:darkred;
     transition: color .2s;
+}
+.car-rent-block-profile{
+    margin: 80px 20px 20px 20px;
+    border: 1px solid black;
+    padding:10px;
+}
+.footer {
+    position: fixed;
+    padding-top: 10px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height:50px;
+    background-color: steelblue;
+    color: white;
+    text-align: center;
+}
+.footer-link
+{
+    color:lightsteelblue;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    display: inline-block;
+    padding: 3px 4px;
+}
+.footer-link:hover
+{
+    color:white;
+    font-size: 20px;
+    transition: color .2s;
+}
+.index-link
+{
+    margin-top:10px;
+    font-size: 40px;
+    color:deepskyblue;
+    text-decoration: none;
+    border-radius: 5px;
+    border: 1px solid deepskyblue;
+    cursor: pointer;
+    display: inline-block;
+    padding: 3px 4px;
+}
+.index-link:hover{
+    color:silver;
+    font-size: 46px;
+    transition: color .2s;
+}
+
+.container{
+    margin-top:50px;
 }

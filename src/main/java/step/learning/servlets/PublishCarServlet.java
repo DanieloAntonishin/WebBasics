@@ -37,35 +37,6 @@ public class PublishCarServlet extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         HttpSession session = req.getSession();
         req.setAttribute("pageBody", "publishcar.jsp");
-        //Map <String,String> attributeGet = new HashMap<>();
-
-        //region Put string fields attribute to map
-       /* attributeGet.put("model",(String) session.getAttribute("model"));
-        attributeGet.put("color",(String) session.getAttribute("color"));
-        attributeGet.put("about",(String) session.getAttribute("about"));
-        attributeGet.put("producer",(String) session.getAttribute("producer"));*/
-        //endregion
-
-        //region Put errors attribute to map
-       /* attributeGet.put("modelError",(String) session.getAttribute("modelError"));
-        attributeGet.put("producerError",(String) session.getAttribute("producerError"));
-        attributeGet.put("fileError",(String) session.getAttribute("fileError"));
-        attributeGet.put("colorError",(String) session.getAttribute("colorError"));
-        attributeGet.put("aboutError",(String) session.getAttribute("aboutError"));
-        attributeGet.put("yearError",(String) session.getAttribute("yearError"));
-        attributeGet.put("priceError",(String) session.getAttribute("priceError"));
-        attributeGet.put("mileageError",(String) session.getAttribute("mileageError"));*/
-       /*  for(String filedName : attributeGet.keySet())
-        {
-            req.setAttribute(filedName,attributeGet.get(filedName));
-        }*/
-       /*for(String filedName : attributeGet.keySet()) // очистка сесии
-        {
-            if(attributeGet.get(filedName)!=null)
-            {
-                session.removeAttribute(filedName);
-            }
-        }*/
 
         boolean complete = false;
         if (session.getAttribute("complete") != null)    // установка и проверка пер-нной результата
@@ -73,6 +44,8 @@ public class PublishCarServlet extends HttpServlet {
         //endregion
 
         System.out.println(complete);
+
+        // установка атрибутов и их ошибок
 
         for (int i = 0; i < attributeField.length; i++) // string
         {
@@ -100,10 +73,6 @@ public class PublishCarServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-        // переменые ввода
-        /*Integer year = Integer.parseInt((String) req.getParameter("year"));
-        Double price = Double.parseDouble((String) req.getParameter("price"));
-        Double mileage =  Double.parseDouble((String) req.getParameter("mileage"));*/
 
         // переменные с проверкой валидации на пустоту
 
@@ -144,7 +113,6 @@ public class PublishCarServlet extends HttpServlet {
 
                 if (fileError == null) {   // сохраняем, если нет ошибок
                     savedName = UUID.randomUUID() + extension;
-                    //String path =new File("./").getAbsolutePath(); // запрос текущей директории - C:\xampp\tomcat\bin.
                     String path = req.getServletContext().getRealPath("/"); // ....\target\WebBasics\
                     File file = new File(path + "../upload/" + savedName);
                     Files.copy(carPics.getInputStream(), file.toPath());
@@ -249,6 +217,8 @@ public class PublishCarServlet extends HttpServlet {
                 changes.setPics(savedName); // edit users path to img
             }
 
+            // принимаем параметры и устанавливаем их в новый объект
+
             String model = req.getParameter("model");
             String bodyType = req.getParameter("bodyType");
             String price = req.getParameter("price");
@@ -273,17 +243,17 @@ public class PublishCarServlet extends HttpServlet {
             resp.getWriter().print(reply);
         }
         else{
-            if(authUser!=null&&req.getParameter("isRented").equals("true"))
+            if(authUser!=null&&req.getParameter("isRented").equals("true"))  // при аренде машины
             {
                 carsDAO.SetDisable(carId);
                 authUser.setIdCar(carId);
             }
-            if(authUser!=null&&req.getParameter("isRented").equals("false"))
+            if(authUser!=null&&req.getParameter("isRented").equals("false")) // при отказе от аренды машины
             {
                 carsDAO.SetActive(carId);
                 authUser.setIdCar(null);
             }
-            String reply = userDAO.updateRentedCar(authUser)
+            String reply = userDAO.updateRentedCar(authUser)    // ответ клиенту
                     ?"OK"
                     :"Update error";
 
@@ -299,11 +269,11 @@ public class PublishCarServlet extends HttpServlet {
         String carId = req.getParameter("id");
         if(authUser!=null&&authUser.getLogin().equals("admin"))
         {
-            if(carsDAO.delete(carId))
+            String path = req.getServletContext().getRealPath("/"); // ....\target\WebBasics\
+            File file= new File(path + "../upload/" + carsDAO.getCarById(carId).getPics());
+            file.delete(); // delete old img by user path
+            if(!carsDAO.delete(carId))
             {
-                resp.sendRedirect(req.getContextPath() + "/carscatalog");
-            }
-            else{
                 resp.getWriter().print("Delete car error");
             }
         }

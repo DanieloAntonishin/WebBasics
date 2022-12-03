@@ -20,6 +20,12 @@ public class CarsDAO {
     {
         this.dataService = dataService;
     }
+
+    /**
+     * Update Car in DB by model obj
+     * @param car
+     * @return true if updated or false if error
+     */
     public boolean updateCar(Cars car) {
         if (car == null || car.getId() == null) return false;
         Map<String, String> sqlReq = new HashMap<>();
@@ -65,6 +71,11 @@ public class CarsDAO {
         return true;
     }
 
+    /**
+     * Get car from DB by car id
+     * @param carId
+     * @return Car object
+     */
     public Cars getCarById(String carId) {
         String sql = "SELECT * FROM Cars u WHERE u.`id`= ? ";
         try (PreparedStatement prep = dataService.getConnection().prepareStatement(sql)) {
@@ -78,6 +89,11 @@ public class CarsDAO {
         }
         return null;
     }
+
+    /**
+     * Get list of all cars in DB
+     * @return List with car obj
+     */
     public List<Cars> getListOfCars() {
         List<Cars> carsList = new ArrayList<>();
         String sql = "SELECT * FROM Cars ";
@@ -129,6 +145,11 @@ public class CarsDAO {
         return id;
     }
 
+    /**
+     * Delete car from DB by car id
+     * @param id
+     * @return false if error with delete from DB
+     */
     public boolean delete(String id)
     {
         String sql = "DELETE FROM Cars WHERE `id` = ?";
@@ -144,6 +165,11 @@ public class CarsDAO {
         return true;
     }
 
+    /**
+     * Change value of boolean field isActive
+     * @param id
+     * @return 
+     */
     public boolean SetActive (String id) {
         String sql = "UPDATE Cars c SET c.`isActive` = '1' WHERE c.`id` = ?";
         try(PreparedStatement prep = dataService.getConnection().prepareStatement(sql)) {

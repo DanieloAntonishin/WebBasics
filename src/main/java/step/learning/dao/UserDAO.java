@@ -221,6 +221,21 @@ public class UserDAO {
         return id;
     }
 
+    public boolean delete(User user)
+    {
+        String sql = "DELETE FROM Users WHERE `id` = ?";
+        try(PreparedStatement prep = dataService.getConnection().prepareStatement(sql)) {
+            prep.setString(1,user.getId());
+            prep.executeUpdate();
+        }
+        catch (SQLException e) {
+            System.out.println("UserDAO::delete "+e.getMessage());
+            System.out.println(sql);
+            return false;
+        }
+        return true;
+    }
+
     /**
      * Checks User table for login given
      *

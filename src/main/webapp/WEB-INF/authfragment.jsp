@@ -12,7 +12,6 @@
         <lable>Login: <input type="text" name="userLogin"></lable>
         <lable>Password: <input type="password" name="userPassword"></lable>
         <button type="submit" >Auth</button>
-        <a class="auth-sing-up" href="<%=home%>/registration">Sign Up</a>
     </form>
     <p><%if(authError!=null) { %></p>
     <div class="auth-error"><%=authError%></div>

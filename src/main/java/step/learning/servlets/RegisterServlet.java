@@ -3,7 +3,9 @@ package step.learning.servlets;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.sun.tools.jconsole.JConsoleContext;
+import step.learning.dao.CarsDAO;
 import step.learning.dao.UserDAO;
+import step.learning.entities.Cars;
 import step.learning.entities.User;
 import step.learning.services.TypeServices;
 
@@ -25,6 +27,8 @@ import java.util.UUID;
 public class RegisterServlet extends HttpServlet {
     @Inject
     private UserDAO userDAO;
+    @Inject
+    private CarsDAO carsDAO;
     @Inject
     private TypeServices typeServices;
 
@@ -266,5 +270,28 @@ public class RegisterServlet extends HttpServlet {
         req.getSession().setAttribute("confPassError",confPassError);
 
         resp.sendRedirect(req.getRequestURI());
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        User authUser = (User) req.getAttribute("AuthUser");
+        String carId = req.getParameter("carId");
+        if(authUser!=null)
+        {
+            String path = req.getServletContext().getRealPath("/"); // ....\target\WebBasics\
+            File file= new File(path + "../upload/" + authUser.getAvatar());
+            file.delete(); // delete old img by user path
+            if(userDAO.delete(authUser))
+            {
+                if(carId!=""||carId!=null) {
+                    carsDAO.SetActive(carId);
+                }
+                req.setAttribute("AuthUser",null);
+            }
+            else{
+                resp.getWriter().print("Delete user error");
+            }
+        }
+
     }
 }
