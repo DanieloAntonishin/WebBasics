@@ -16,11 +16,14 @@
                 <a href="#">Log out</a>
             </div>
             <% if(car != null) {%>
-            <div class="margin-top">
+            <div class="car-rent-block-profile">
                 <p>Car in rent</p>
+                <img class="user-profile-img" src="<%=home%>/image/<%=car.getPics()%>" alt="<%=car.getModel()%>"/>
                 <div>
-                    <img class="user-profile-img" src="<%=home%>/image/<%=car.getPics()%>" alt="<%=car.getModel()%>"/>
-                    <b data-field-name="carId"><%=car.getModel()%></b>
+                    <b>Model:<%=car.getModel()%></b>
+                    <br>
+                    <b>Price: <%=car.getPrice()%> / per day</b>
+                    <br>
                     <button id="remove-rent-car">Remove from rent</button>
                 </div>
             </div>
@@ -103,19 +106,21 @@
     }
     let removeRentClick=()=>{
         <% if(car != null) {%>
-        const url="/WebBasics_war_exploded/publishcar?id=<%=car.getId()%>&isRented=false"
-        fetch(url,{
-            method:"PUT",
-            headers:{},
-            body:""
-        }).then(r=>r.text())
-            .then(t=>{
-                console.log(t)
-                if(t==="OK")
-                {
-                    location=location;
-                }
-            })
+        if(confirm("Вы уверены что хотите отказатся от аренды авто?"))
+        {
+            const url = "/WebBasics_war_exploded/publishcar?id=<%=car.getId()%>&isRented=false"
+            fetch(url, {
+                method: "PUT",
+                headers: {},
+                body: ""
+            }).then(r => r.text())
+                .then(t => {
+                    console.log(t)
+                    if (t === "OK") {
+                        location = location;
+                    }
+                })
+        }
         <% } %>
     }
     let changePassClick=(e)=>{

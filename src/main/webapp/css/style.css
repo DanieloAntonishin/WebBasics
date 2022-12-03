@@ -195,6 +195,7 @@ input[type="image"]{
     margin-right:20px;
 }
 .confirm{
+    margin-top: 10px;
     color:darkgreen;
 }
 .confirm:before{
@@ -344,4 +345,9 @@ input[type="image"]{
     background-color: white;
     color:darkred;
     transition: color .2s;
+}
+.car-rent-block-profile{
+    margin: 100px 20px 20px 20px;
+    border: 1px solid black;
+    padding:20px;
 }

@@ -12,7 +12,7 @@
         <section class="car-section-left">
             <div class="container-centre">
                 <img class="car-img" src="<%=home%>/image/<%=car.getPics()%>" alt="<%=car.getModel()%>">
-                <%if(authUser!=null && authUser.getLogin().equals("person")) { %>
+                <%if(authUser!=null && authUser.getLogin().equals("admin")) { %>
                     <div class="profile-field">
                         <span>Change pics:</span>
                         <input class="form-group" type="file" id="car-pics" alt="car-input"/>
@@ -35,10 +35,9 @@
                 <p>Additional information about car: <span data-field-name="about"><%=car.getAbout()%></span></p>
                 <hr>
                 <div class="container-centre">
-                    <input type="hidden" name="carId" value="<%=car.getId()%>">
                     <%if(authUser == null) { %>
                         <div>You must be logged in</div>
-                        <button id="rent-button" class="car-card-button"  disabled>Rent a car</button>
+                        <button class="car-card-button"  disabled>Rent a car</button>
                     <% } else { %>
                         <button id="rent-button" class="car-card-button" >Rent a car</button>
                     <% } %>
@@ -49,7 +48,7 @@
 
 <script>
     document.addEventListener("DOMContentLoaded",()=> {
-        <% if(authUser!=null&&authUser.getLogin().equals("person")) { %>
+        <% if(authUser!=null&&authUser.getLogin().equals("admin")) { %>
             for (let nameElement of document.querySelectorAll(".car-section-right span")){
                 nameElement.addEventListener("click", nameClick)
                 nameElement.addEventListener("blur", nameBlur)
@@ -105,11 +104,6 @@
             })
     }
     let rentCarClick=()=>{
-        let menu = document.querySelector(".menu");
-        let p = document.createElement("p")
-        p.innerHTML="Car rented successful"
-        menu.appendChild(p)
-        document.querySelector("#rent-button").disable = true
         const url="/WebBasics_war_exploded/publishcar?id=<%=car.getId()%>&isRented=true"
         fetch(url,{
             method:"PUT",
@@ -120,7 +114,13 @@
                 console.log(t)
                 if(t==="OK")
                 {
-                    location=location;
+                    let menu = document.querySelector(".container-centre");
+                    let h4 = document.createElement("h4")
+                    h4.className="confirm";
+                    h4.innerHTML="Car rented successful"
+                    menu.appendChild(h4)
+                    let but = document.querySelector("#rent-button")
+                    but.setAttribute("disabled","true")
                 }
             })
     }

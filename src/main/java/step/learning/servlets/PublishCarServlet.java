@@ -217,7 +217,7 @@ public class PublishCarServlet extends HttpServlet {
         Cars changes = new Cars();
         String carId = req.getParameter("id");
         Cars oldCar = carsDAO.getCarById(carId);
-        if(authUser.getLogin().equals("person")){
+        if(authUser.getLogin().equals("admin")){
             Part carPics = null;
             try {
                 carPics = req.getPart("carPics");
@@ -275,31 +275,29 @@ public class PublishCarServlet extends HttpServlet {
         else{
             if(authUser!=null&&req.getParameter("isRented").equals("true"))
             {
-                resp.getWriter().print("Ok. you rent it");
                 carsDAO.SetDisable(carId);
                 authUser.setIdCar(carId);
             }
             if(authUser!=null&&req.getParameter("isRented").equals("false"))
             {
-                resp.getWriter().print("Ok. you cancel rent it");
                 carsDAO.SetActive(carId);
                 authUser.setIdCar(null);
             }
-            userDAO.updateRentedCar(authUser);
+            String reply = userDAO.updateRentedCar(authUser)
+                    ?"OK"
+                    :"Update error";
+
+            resp.getWriter().print(reply);
         }
 
-//        String reply = carsDAO.updateCar(changes)
-//                ?"OK"
-//                :"Update error";
-//
-//        resp.getWriter().print(reply);
+
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User authUser = (User) req.getAttribute("AuthUser");
         String carId = req.getParameter("id");
-        if(authUser!=null&&authUser.getLogin().equals("person"))
+        if(authUser!=null&&authUser.getLogin().equals("admin"))
         {
             if(carsDAO.delete(carId))
             {
