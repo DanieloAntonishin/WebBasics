@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import java.sql.Statement;
-import java.time.Year;
 import java.util.*;
 
 @Singleton
@@ -22,7 +21,7 @@ public class CarsDAO {
     }
 
     /**
-     * Update Car in DB by model obj
+     * Update Car in DB by model car obj
      * @param car
      * @return true if updated or false if error
      */
@@ -166,9 +165,9 @@ public class CarsDAO {
     }
 
     /**
-     * Change value of boolean field isActive
+     * Change value of boolean field isActive on active
      * @param id
-     * @return 
+     * @return false if set value to field error
      */
     public boolean SetActive (String id) {
         String sql = "UPDATE Cars c SET c.`isActive` = '1' WHERE c.`id` = ?";
@@ -183,6 +182,12 @@ public class CarsDAO {
         }
         return true;
     }
+
+    /**
+     * Change value of boolean field isActive on disable
+     * @param id
+     * @return false if set value to field error
+     */
     public boolean SetDisable(String id) {
         String sql = "UPDATE Cars c SET c.`isActive` = '0' WHERE c.`id` = ?";
         try(PreparedStatement prep = dataService.getConnection().prepareStatement(sql)) {

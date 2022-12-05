@@ -17,7 +17,7 @@ html{
 body {
     background-color: #4e4e4e;
     overflow-x:hidden;
-    margin:0px;
+    margin:0;
 }
 .auth-error{
     width: 100%;
@@ -315,7 +315,7 @@ input[type="image"]{
 .car-section-right{
     font-size: large;
     width: 300px;
-    margin: 50px 100px 30px 0px;
+    margin: 50px 100px 30px 0;
     padding-top: 30px;
     background-color: steelblue;
     height:600px;
@@ -416,4 +416,39 @@ input[type="image"]{
 
 .container{
     margin-top:50px;
+}
+
+@media screen and (max-width: 700px) {
+    .main-h1{
+        font-size: x-large;
+    }
+    .main-h3{
+        font-size: medium;
+        margin-top: 20px;
+        margin-bottom:20px;
+    }
+    .index-link
+    {
+        margin-top:10px;
+        font-size: 20px;
+        color:deepskyblue;
+        text-decoration: none;
+        border-radius: 5px;
+        border: 1px solid deepskyblue;
+        cursor: pointer;
+        display: inline-block;
+        padding: 3px 4px;
+    }
+    .index-link:hover{
+        color:silver;
+        font-size: 26px;
+        transition: color .2s;
+    }
+    .background-text{
+        position: absolute;
+        top:50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color:white;
+    }
 }

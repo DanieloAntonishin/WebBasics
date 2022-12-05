@@ -7,7 +7,7 @@
 </section>
 <section>
     <div class="container-centre container-background-text">
-        <img style="width:100%;height: auto;opacity: 0.6" src="<%= home%>/img/index_background.jpg"/>
+        <img style="width:auto;max-width:100%;height: auto;opacity: 0.6" src="<%= home%>/img/index_background.jpg"/>
         <div class="background-text">
             <h1 class="main-h1">Rental Car</h1>
             <h3 class="main-h3">Change scenery, not standards.<br>

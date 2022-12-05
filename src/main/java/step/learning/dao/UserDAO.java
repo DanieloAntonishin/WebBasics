@@ -11,7 +11,6 @@ import javax.inject.Named;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 import java.util.UUID;
 
 @Singleton
@@ -30,7 +29,11 @@ public class UserDAO {
         this.connection = dataService.getConnection();
     }
 
-
+    /**
+     * Change value of email_code_attempts if user enter wrong email_code
+     * @param user
+     * @return false if error in DB
+     */
     public boolean incEmailCodeAttempts (User user){
         if(user==null||user.getId()==null) return false;
         String sql = "UPDATE users u SET u.`email_code_attempts` = u.`email_code_attempts`+1 WHERE u.`id`= ? ";
@@ -148,6 +151,12 @@ public class UserDAO {
         }
         return true;
     }
+
+    /**
+     * Update field of foreign key id_car and set id of rented car for user
+     * @param userId
+     * @return false if error in DB
+     */
     public boolean updateRentedCar(User userId)
     {
         String sql="UPDATE Users u SET u.`id_car` = ? WHERE u.`id`= ? ";
@@ -164,6 +173,11 @@ public class UserDAO {
         return false;
     }
 
+    /**
+     * Get user obj by user id
+     * @param userId
+     * @return user object
+     */
     public User getUserById(String userId)
     {
         String sql="SELECT * FROM Users u WHERE u.`id`= ? ";
@@ -221,6 +235,11 @@ public class UserDAO {
         return id;
     }
 
+    /**
+     * Delete user from DB by user object
+     * @param user
+     * @return false if error in DB
+     */
     public boolean delete(User user)
     {
         String sql = "DELETE FROM Users WHERE `id` = ?";
@@ -242,7 +261,6 @@ public class UserDAO {
      * @param login valur to look
      * @return true if log is in table
      */
-
     public boolean isLoginUsed(String login) {
         if (!(login == null || login.equals("")))      // валидация на пустоту и null
         {
@@ -259,26 +277,6 @@ public class UserDAO {
             }
         }
         return false;
-    }
-
-    public boolean isLoginUsedOld(String login) {
-        if (!(login == null || login.equals("")))      // валидация на пустоту и null
-        {
-            String sql = "SELECT `login` FROM users";                    // запрос к базе данных для получения всех login
-            try (Statement statement = connection.createStatement()) {    // для проверки на уже существующий в таблице
-                ResultSet res = // DataReader
-                        statement.executeQuery(sql);
-                while (res.next()) {
-                    if (login.equals(res.getString(1))) {
-
-                        return true;        // выкидываем, если login уже есть то не добавляем запись в таблицу
-                    }
-                }
-                res.close();
-            } catch (SQLException ignored) {
-            }
-        }
-        return false;   // если все ок
     }
 
     /**
@@ -315,25 +313,8 @@ public class UserDAO {
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-            System.out.println(ex);
         }
         return null;
     }
-
-    public User getUserByCredentialsOld(String login, String pass) {
-        String sql = "SELECT u.* FROM Users u WHERE u.`login`=? AND u.`pass`=?";
-        try (PreparedStatement prep = connection.prepareStatement(sql)) {
-            prep.setString(1, login);
-            prep.setString(2, pass);
-            ResultSet res = prep.executeQuery();
-            if (res.next()) return new User(res);
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-            System.out.println(sql);
-        }
-        return null;
-    }
-
-
 
 }
