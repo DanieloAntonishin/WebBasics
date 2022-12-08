@@ -37,23 +37,24 @@
             <div class="margin-top">
                 <div class="input-user-block">
                     <div class="profile-field">
-                    <p>Имя: <span data-field-name="name"><%=authUser.getName()%></span></p>
-                    <p>Логин:  <span data-field-name="login"><%=authUser.getLogin()%></span></p>
+                    <p>Name: <span data-field-name="name"><%=authUser.getName()%></span></p>
+                    <p>Login:  <span data-field-name="login"><%=authUser.getLogin()%></span></p>
+                    <p>Balance:  <span data-field-name="money"><%=authUser.getAccountMoney()%></span></p>
                     <p id="email">Email:  <span data-field-name="email"><%=authUser.getEmail()%></span></p>
                         <% if(authUser.getEmailCodeAttempts()>3) {%>
-                            <p class="not-confirm">Превышено количество попыток подтверждить код. Меняй почту и давай по новой</p>
+                            <p class="not-confirm">Exceeded the number of values to validate the code. change your email and start again</p>
                         <% } %>
                     </div>
                 </div>
                 <div class="profile-field">
-                    <span>Аватарка:</span>
+                    <span>Avatar pics:</span>
                     <input class="form-group" type="file" id="avatar-input" alt="avatar-input"/>
                     <br>
                     <button id="user-profile-button" class="car-card-button" >Change avatar</button>
                 </div>
                 <p style="border: 2px solid cadetblue;margin: 10px">
-                    <label>Пароль : <input type="password" name=""></label><br>
-                    <label>Повтор : <input type="password" name=""></label><br>
+                    <label>Password : <input type="password" name=""></label><br>
+                    <label>Repeat password : <input type="password" name=""></label><br>
                     <button id="change-pass-button" class="car-card-button">Update</button>
                 </p>
             </div>

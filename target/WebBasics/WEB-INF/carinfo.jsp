@@ -37,8 +37,11 @@
                 <div class="container-centre">
                     <%if(authUser == null) { %>
                         <div>You must be logged in</div>
-                        <button class="car-card-button"  disabled>Rent a car</button>
-                    <% } else { %>
+                        <button class="car-card-button" disabled>Rent a car</button>
+                    <% } else if(authUser.getIdCar()!=null) { %>
+                        <div>You have already rented a car</div>
+                        <button class="car-card-button" disabled>Rent a car</button>
+                    <% } else {%>
                         <button id="rent-button" class="car-card-button" >Rent a car</button>
                     <% } %>
                 </div>
@@ -72,7 +75,6 @@
                 body:""
             }).then(r=>r.text())
                 .then(t=>{
-                    console.log(t)
                     location = "<%=home%>/carscatalog"
                 })
         }
@@ -104,25 +106,30 @@
             })
     }
     let rentCarClick=()=>{
-        const url="/WebBasics_war_exploded/publishcar?id=<%=car.getId()%>&isRented=true"
-        fetch(url,{
-            method:"PUT",
-            headers:{},
-            body:""
-        }).then(r=>r.text())
-            .then(t=>{
-                console.log(t)
-                if(t==="OK")
-                {
-                    let menu = document.querySelector(".container-centre");
-                    let h4 = document.createElement("h4")
-                    h4.className="confirm";
-                    h4.innerHTML="Car rented successful"
-                    menu.appendChild(h4)
-                    let but = document.querySelector("#rent-button")
-                    but.setAttribute("disabled","true")
-                }
-            })
+        if(<%=authUser.getAccountMoney()<car.getPrice()%>)
+        {
+            alert("Not enough money to rent")
+        }
+        else {
+            const url = "/WebBasics_war_exploded/publishcar?id=<%=car.getId()%>&isRented=true"
+            fetch(url, {
+                method: "PUT",
+                headers: {},
+                body: ""
+            }).then(r => r.text())
+                .then(t => {
+                    console.log(t)
+                    if (t === "OK") {
+                        let menu = document.querySelector(".container-centre");
+                        let h4 = document.createElement("h4")
+                        h4.className = "confirm";
+                        h4.innerHTML = "Car rented successful"
+                        menu.appendChild(h4)
+                        let but = document.querySelector("#rent-button")
+                        but.setAttribute("disabled", "true")
+                    }
+                })
+        }
     }
     let nameKeyDown=(e)=>{
         if(e.keyCode==13)

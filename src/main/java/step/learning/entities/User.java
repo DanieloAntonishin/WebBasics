@@ -13,7 +13,7 @@ public class User {
     private String emailCode;
     private String idCar;
     private int emailCodeAttempts;
-
+    private double accountMoney;
     private String avatar;
     public User() {
     }
@@ -27,8 +27,17 @@ public class User {
         idCar  = res.getString("id_car");
         avatar = res.getString("avatar");
         email = res.getString("email");
+        accountMoney = res.getDouble("money");
         emailCode = res.getString("email_code");
         emailCodeAttempts = res.getInt("email_code_attempts");
+    }
+
+    public double getAccountMoney() {
+        return accountMoney;
+    }
+
+    public void setAccountMoney(double accountMoney) {
+        this.accountMoney = accountMoney;
     }
 
     public int getEmailCodeAttempts() {

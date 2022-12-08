@@ -10,6 +10,7 @@ import step.learning.services.DataService;
 import javax.inject.Named;
 import java.sql.*;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
@@ -81,9 +82,10 @@ public class UserDAO {
     {
         if(user==null||user.getId()==null) return false;
         Map<String,String> sqlReq=new HashMap<>();
-        Map<String,Integer> sqlReqNumeric = new HashMap<>(); // для числовых
+        Map<String,Double> sqlReqNumeric = new HashMap<>(); // для числовых
         if(user.getLogin()!=null) sqlReq.put("login",user.getLogin());
         if(user.getName()!=null) sqlReq.put("name",user.getName());
+        if(user.getAccountMoney() > 0.0) sqlReqNumeric.put("money", user.getAccountMoney());
         if(user.getIdCar()!=null) {
             if(user.getIdCar().equals("null")) {
                 sqlReq.put("id_car", null);
@@ -99,7 +101,7 @@ public class UserDAO {
             sqlReq.put("email",user.getEmail());
             sqlReq.put("email_code",user.getEmailCode());
             // + сборос счетчика попыток
-            sqlReqNumeric.put("email_code_attempts",0);
+            sqlReqNumeric.put("email_code_attempts",(double)0);
         }
         if(user.getPass()!=null) {   // изминение пароля
             // генерируем соль
@@ -119,7 +121,7 @@ public class UserDAO {
         }
         for(String filedName : sqlReqNumeric.keySet())  // числовые поля не несут опасности,
         {                                               // поэтому подставляем сразу в запрос
-            sql+=String.format("%c u.`%s` = %d ",(needComma? ',':' '),filedName,sqlReqNumeric.get(filedName));
+            sql+=String.format(Locale.US,"%c u.`%s` = %.2f ",(needComma? ',':' '),filedName,sqlReqNumeric.get(filedName));
             needComma=true;
         }
 

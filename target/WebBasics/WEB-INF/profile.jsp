@@ -39,6 +39,7 @@
                     <div class="profile-field">
                     <p>Имя: <span data-field-name="name"><%=authUser.getName()%></span></p>
                     <p>Логин:  <span data-field-name="login"><%=authUser.getLogin()%></span></p>
+                    <p>Денег на аккаунте:  <span data-field-name="money"><%=authUser.getAccountMoney()%></span></p>
                     <p id="email">Email:  <span data-field-name="email"><%=authUser.getEmail()%></span></p>
                         <% if(authUser.getEmailCodeAttempts()>3) {%>
                             <p class="not-confirm">Превышено количество попыток подтверждить код. Меняй почту и давай по новой</p>
@@ -108,7 +109,6 @@
                 method:"DELETE",
             }).then(r=>r.text())
                 .then(t=>{
-                    console.log(t)
                     location = "<%=home%>/"
                 })
         }

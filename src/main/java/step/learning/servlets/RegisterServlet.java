@@ -72,7 +72,8 @@ public class RegisterServlet extends HttpServlet {
         String carId = req.getParameter("carId");
         String name = req.getParameter("name");
         String email = req.getParameter("email");
-        String password=req.getParameter("password");
+        String password = req.getParameter("password");
+        String accountMoney = req.getParameter("money");
 
         if(login!=null)
         {
@@ -89,6 +90,7 @@ public class RegisterServlet extends HttpServlet {
         changes.setIdCar(carId);
         changes.setEmail(email);
         changes.setPass(password);
+        changes.setAccountMoney(accountMoney!=null?Double.parseDouble(accountMoney):0.0);
 
         reply = userDAO.updateUser(changes)
                 ?"OK"
