@@ -35,7 +35,7 @@ public class UserDAO {
      * @param user
      * @return false if error in DB
      */
-    public boolean incEmailCodeAttempts (User user){
+    public boolean incEmailCodeAttempts (User user) {
         if(user==null||user.getId()==null) return false;
         String sql = "UPDATE users u SET u.`email_code_attempts` = u.`email_code_attempts`+1 WHERE u.`id`= ? ";
         try(PreparedStatement statement = dataService.getConnection().prepareStatement(sql)){
@@ -56,7 +56,7 @@ public class UserDAO {
      * @param user with Id set
      * @return success status
      */
-    public boolean confirmEmail(User user){
+    public boolean confirmEmail(User user) {
         if(user.getId() == null) return false;
 
         String sql = "UPDATE Users SET email_code = NULL WHERE id = ?";
@@ -78,8 +78,7 @@ public class UserDAO {
      * @param user entity 'User' with 'id'
      * @return result 'true/false'
      */
-    public boolean updateUser(User user)
-    {
+    public boolean updateUser(User user) {
         if(user==null||user.getId()==null) return false;
         Map<String,String> sqlReq=new HashMap<>();
         Map<String,Double> sqlReqNumeric = new HashMap<>(); // для числовых
@@ -159,8 +158,7 @@ public class UserDAO {
      * @param userId
      * @return false if error in DB
      */
-    public boolean updateRentedCar(User userId)
-    {
+    public boolean updateRentedCar(User userId) {
         String sql="UPDATE Users u SET u.`id_car` = ? WHERE u.`id`= ? ";
         try(PreparedStatement prep=dataService.getConnection().prepareStatement(sql))
         {
@@ -180,8 +178,7 @@ public class UserDAO {
      * @param userId
      * @return user object
      */
-    public User getUserById(String userId)
-    {
+    public User getUserById(String userId) {
         String sql="SELECT * FROM Users u WHERE u.`id`= ? ";
         try(PreparedStatement prep=dataService.getConnection().prepareStatement(sql))
         {
@@ -242,8 +239,7 @@ public class UserDAO {
      * @param user
      * @return false if error in DB
      */
-    public boolean delete(User user)
-    {
+    public boolean delete(User user) {
         String sql = "DELETE FROM Users WHERE `id` = ?";
         try(PreparedStatement prep = dataService.getConnection().prepareStatement(sql)) {
             prep.setString(1,user.getId());
@@ -307,7 +303,6 @@ public class UserDAO {
                 User user = new User(res);
                 // pass - открытий пароль, user.pass - Hash(pass,user.salt)
                 // если у пользователя нет соли, то не добавляем её при хешировании входящего пароля пользователя
-                System.out.println(user.getPass());
                 if(this.hashPassword(pass, user.getSalt()==null ? "" : user.getSalt()).equals(user.getPass()))
                 {
                     return user;

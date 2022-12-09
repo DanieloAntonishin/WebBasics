@@ -52,9 +52,9 @@
                     <br>
                     <button id="user-profile-button" class="car-card-button" >Change avatar</button>
                 </div>
-                <p style="border: 2px solid cadetblue;margin: 10px">
-                    <label>Password : <input type="password" name=""></label><br>
-                    <label>Repeat password : <input type="password" name=""></label><br>
+                <p class="profile-pwd-block">
+                    <input type="password" name="" placeholder="Password "><br>
+                    <input type="password" name="" placeholder="Repeat password "><br>
                     <button id="change-pass-button" class="car-card-button">Update</button>
                 </p>
             </div>

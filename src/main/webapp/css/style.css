@@ -4,6 +4,7 @@ html{
 .auth-fragment {
     width: 100%;
     background-color: steelblue;
+    height:50px;
     padding: .7ch .5em;
 }
 .main-h1{
@@ -22,8 +23,8 @@ body {
 .auth-error{
     width: 100%;
     height: 1.5em;
-    background-color: moccasin;
-    color:darkred;
+    background-color: lightsteelblue;
+    color:darkblue;
 }
 .container-background-text{
     position: relative;
@@ -416,6 +417,11 @@ input[type="image"]{
 
 .container{
     margin-top:50px;
+}
+
+.profile-pwd-block{
+    border: 2px solid cadetblue;
+    margin: 10px;
 }
 
 @media screen and (max-width: 700px) {

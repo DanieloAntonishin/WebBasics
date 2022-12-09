@@ -45,8 +45,7 @@ public class AuthFilter implements Filter {
                 else{
                     session.setAttribute("AuthUserId",user.getId());
                 }
-                System.out.println(userLogin+" "+userPassword +" "+
-                        (user==null? "null": user.getId())+"|"+user.getEmailCodeAttempts());
+                //System.out.println(userLogin+" "+userPassword);
 
                 response.sendRedirect(request.getRequestURI()+"?"+request.getQueryString());
                 return;

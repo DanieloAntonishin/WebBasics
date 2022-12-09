@@ -149,8 +149,7 @@ public class CarsDAO {
      * @param id
      * @return false if error with delete from DB
      */
-    public boolean delete(String id)
-    {
+    public boolean delete(String id) {
         String sql = "DELETE FROM Cars WHERE `id` = ?";
         try(PreparedStatement prep = dataService.getConnection().prepareStatement(sql)) {
             prep.setString(1,id);
