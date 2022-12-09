@@ -13,7 +13,7 @@
         <lable>Password: <input type="password" name="userPassword"></lable>
         <button type="submit" >Auth</button>
     </form>
-    <p><%if(authError!=null) { %></p>
+    <p><% if(authError!=null) { %></p>
     <div class="auth-error"><%=authError%></div>
     <% }} else {%>
     <form method="get" action="" >

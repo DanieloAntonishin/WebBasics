@@ -30,7 +30,7 @@ public class CarsDAO {
         Map<String, String> sqlReq = new HashMap<>();
         Map<String, Double> sqlReqNumeric = new HashMap<>(); // для числовых
         if (car.getModel() != null) sqlReq.put("model", car.getModel());
-        if (car.getBodyType() != null) sqlReq.put("bodyType", car.getBodyType());
+        if (car.getBodyType() != null) sqlReq.put("body_type", car.getBodyType());
         if (car.getAbout() != null) sqlReq.put("about", car.getAbout());
         if (car.getPics() != null) sqlReq.put("pics", car.getPics());
         if (car.getHorsePower() > 0) sqlReqNumeric.put("horse_power", (double) car.getHorsePower());

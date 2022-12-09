@@ -106,7 +106,7 @@
             })
     }
     let rentCarClick=()=>{
-        if(<%=authUser.getAccountMoney()<car.getPrice()%>)
+        if(<%=authUser!=null&&authUser.getAccountMoney()<car.getPrice()%>)
         {
             alert("Not enough money to rent")
         }
